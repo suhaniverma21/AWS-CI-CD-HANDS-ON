@@ -4,15 +4,20 @@ phases:
   install:
     runtime-versions:
       java: corretto21
+
   build:
     commands:
+      - echo "PWD:" && pwd
+      - echo "Listing repo root:" && ls -lah
       - mvn -v
       - mvn clean package -DskipTests
-      - ls -lah target
-      - cp target/*.jar app.jar
+      - echo "Listing target/:" && ls -lah target
+      - JAR=$(ls target/*.jar | head -n 1)
+      - echo "Using jar: $JAR"
+      - cp "$JAR" app.jar
+      - echo "Final files:" && ls -lah
 
 artifacts:
   files:
     - app.jar
     - Procfile
-  discard-paths: yes
