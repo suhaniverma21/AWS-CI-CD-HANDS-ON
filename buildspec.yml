@@ -4,11 +4,13 @@ phases:
   install:
     runtime-versions:
       java: corretto21
+
   build:
     commands:
+      - cd aws
       - mvn -v
       - mvn clean package -DskipTests
 
 artifacts:
   files:
-    - target/*.jar
+    - aws/target/*.jar
