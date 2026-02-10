@@ -7,17 +7,23 @@ phases:
 
   build:
     commands:
-      - "echo PWD: && pwd"
-      - "echo Listing repo root: && ls -lah"
+      - "echo Starting build in root"
+      - "pwd"
+      - "ls -lah"
+      - "cd aws"
+      - "echo Now inside aws directory"
+      - "pwd"
+      - "ls -lah"
       - "mvn -v"
       - "mvn clean package -DskipTests"
-      - "echo Listing target/: && ls -lah target"
+      - "ls -lah target"
       - "JAR=$(ls target/*.jar | head -n 1)"
-      - "echo Using jar: $JAR"
+      - "echo Built jar is $JAR"
       - "cp \"$JAR\" app.jar"
-      - "echo Final files: && ls -lah"
+      - "ls -lah app.jar"
 
 artifacts:
   files:
-    - app.jar
-    - Procfile
+    - aws/app.jar
+    - aws/Procfile
+  discard-paths: yes
