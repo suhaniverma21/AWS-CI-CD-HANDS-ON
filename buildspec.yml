@@ -1,16 +1,15 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      java: corretto21
-
   build:
     commands:
       - cd aws
       - mvn -v
       - mvn clean package -DskipTests
+      - cp target/*.jar app.jar
 
 artifacts:
   files:
-    - aws/target/*.jar
+    - aws/app.jar
+    - aws/Procfile
+  discard-paths: yes
